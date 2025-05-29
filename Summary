@@ -3,18 +3,14 @@ This is a basic image classification project using the MNIST dataset, which cont
 
 🧱 Step-by-Step Breakdown
 1. Importing Libraries
-python
-Copy
-Edit
+
 import tensorflow as tf
 from tensorflow.keras import layers, models
 import matplotlib.pyplot as plt
 We import TensorFlow for building the neural network, and Matplotlib for visualizing training results.
 
 2. Loading the Dataset
-python
-Copy
-Edit
+
 (X_train, y_train), (X_test, y_test) = tf.keras.datasets.mnist.load_data()
 We load the MNIST dataset, which is already available in TensorFlow. It’s split into training and test sets.
 
@@ -23,16 +19,12 @@ X_train, X_test: The images (28x28 pixels).
 y_train, y_test: The corresponding labels (digits 0 to 9).
 
 3. Preprocessing the Data
-python
-Copy
-Edit
+
 X_train, X_test = X_train / 255.0, X_test / 255.0
 We normalize the pixel values to the range [0, 1] to help the model train faster and more effectively.
 
 4. Building the Neural Network
-python
-Copy
-Edit
+
 model = models.Sequential([
     layers.Flatten(input_shape=(28, 28)),       # Convert 2D image to 1D vector
     layers.Dense(128, activation='relu'),       # Fully connected hidden layer
@@ -48,9 +40,7 @@ Dropout (20%): Helps prevent overfitting.
 Dense (10 neurons): The output layer with softmax to output probabilities for the 10 classes.
 
 5. Compiling the Model
-python
-Copy
-Edit
+
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
@@ -61,16 +51,12 @@ Sparse Categorical Crossentropy: Used because labels are integers (not one-hot).
 Accuracy: We want to track how well the model is doing.
 
 6. Training the Model
-python
-Copy
-Edit
+
 history = model.fit(X_train, y_train, epochs=5, validation_data=(X_test, y_test))
 We train the model for 5 epochs, using part of the data to validate performance.
 
 7. Evaluating the Model
-python
-Copy
-Edit
+
 test_loss, test_acc = model.evaluate(X_test, y_test)
 print('\nTest accuracy:', test_acc)
 After training, we evaluate how well the model performs on unseen test data.
